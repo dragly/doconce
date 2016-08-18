@@ -1,9 +1,7 @@
-FROM continuumio/anaconda
+FROM ubuntu:16.04
 
-# Fix issue with httpredir.debian.org failing
-RUN sed --in-place 's/httpredir.debian.org/mirrors.rackhosting.com/' /etc/apt/sources.list
 RUN apt-get update && \
-    apt-get install -qq\
+    apt-get install -qy --no-install-recommends\
     sudo\
     mercurial\
     git\
@@ -39,7 +37,16 @@ RUN apt-get update && \
     python-pip\
     idle\
     python-dev\
-    python-pdftools
+    python-pdftools\
+    apt-utils\
+    build-essential\
+    autoconf\
+    libxml2-dev\
+    libxslt1-dev\
+    python-dev\
+    zlib1g-dev
+    
+RUN pip install --upgrade wheel
 
 ADD doc/src/manual/install_doconce.sh /install_doconce.sh
-RUN /install_doconce.sh
+RUN /install_doconce.sh && rm /srclib
