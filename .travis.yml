@@ -1,7 +1,9 @@
 language: ruby
 sudo: required
+services:
+    - docker
 install:
-    - ./doc/src/manual/install_doconce.sh
+    - docker build -t doconce/doconce .
 script:
-    - doconce --version
+    - docker run doconce/doconce doconce --version
     
