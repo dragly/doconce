@@ -5,9 +5,9 @@ RUN apt-get -qq update &&\
 
 ADD . /doconce
 WORKDIR /doconce
-RUN ./doc/src/manual/install_doconce.sh
+RUN ./doc/src/manual/install_doconce.sh &&\
     # make sure this git version is installed and not the one from the script
-RUN python setup.py install
+    python setup.py install &&\
     # reduce space in the image
-RUN rm -rf srclib
-RUN apt-get remove --purge -qy libreoffice libreoffice-dmaths kdiff3 totem evince 
+    rm -rf srclib &&\
+    apt-get remove --purge -qy libreoffice libreoffice-dmaths kdiff3 totem evince 
