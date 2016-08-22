@@ -3,3 +3,4 @@ install:
     - ./doc/src/manual/install_doconce.sh
 script:
     - doconce --version
+    
